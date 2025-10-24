@@ -15,6 +15,7 @@ In this project, you will train, run and serve a machine learning model using Do
 - [ ] Build an Apptainer image on a HPC of your choice
 - [ ] Provide the logs of the slurm job in GitHub
 - [ ] Document the steps in a text document in GitHub
+- [ ] Send a zip file of your gitrepository when you are done (that is what will be evaluated)
 
 ## Proposed steps - containerize and run training the machine learning model
 
@@ -40,5 +41,7 @@ Complete file named `Dockerfile.train`
 - Create a shell script on the HPC of your preference
 - Store the shell script in your cloned github repository
 
+## Project delivery
 
+- Send the zip file to the trainers
 
