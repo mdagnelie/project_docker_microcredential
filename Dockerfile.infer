@@ -1,8 +1,14 @@
+#start from a lightweight Python 3.9 image and build on top of it with required dependencies and files
 FROM python:3.9-slim
+# set a working directory inside the container
 WORKDIR /app
+# copy the requirements.txt file to the working directory (the dot at the end specifies the destination as the current working directory inside the container)
 COPY requirements.txt .
+# install the Python dependencies inside the container
 RUN pip install --no-cache-dir -r requirements.txt
+#copy the server script (server.py) to the working directory
 COPY server.py .
-#container will listen on local port 8080
+#container will listen on local port 8080 for incoming requests
 EXPOSE 8080 
+#run the server script when the container starts
 CMD ["python", "server.py"]

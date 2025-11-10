@@ -1,18 +1,14 @@
-FROM python:3.9-slim
 #start from a lightweight Python 3.9 image and build on top of it with required dependencies and files
-
-# TODO: Set a working directory inside the container
+FROM python:3.9-slim
+#Set a working directory inside the container
 WORKDIR /app
-# TODO: Copy the requirements.txt file to the working directory
+#Copy the requirements.txt file to the working directory
 COPY requirements.txt .
 #the dot at the end specifies the destination as the current working directory
-
-# TODO: Install the Python dependencies
-RUN pip install ---no-cache-dir -r requirements.txt  
+#Install the Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt  
 #--no-cache-dir prevents caching of packages to reduce image size (that would otherwise increase each time dependencies are updated) ; -r specifies the requirements file to install from
-
-# TODO: Copy the training script (train.py) to the working directory
+#Copy the training script (train.py) to the working directory
 COPY train.py .
-
-# TODO: Run the training script that generates the model
+#Run the training script that generates the model
 CMD ["python", "train.py"]
