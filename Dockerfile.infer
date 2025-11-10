@@ -1,7 +1,8 @@
+FROM python:3.9-slim
 WORKDIR /app
 COPY requirements.txt .
-COPY server.py .
-FROM python:3.9-slim
-CMD ["python", "server.py"]
 RUN pip install --no-cache-dir -r requirements.txt
-EXPOSE 8080
+COPY server.py .
+#container will listen on local port 8080
+EXPOSE 8080 
+CMD ["python", "server.py"]
