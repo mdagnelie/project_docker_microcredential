@@ -12,3 +12,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY train.py .
 #Run the training script that generates the model
 CMD ["python", "train.py"]
+
+#To build and run the Docker image and container for model training:
+#`docker build --tag ml-train:v0.1 -f Dockerfile.train .`
+#`docker run -u 501:20 -v ./models:/app/models ml-train:v0.1`
+

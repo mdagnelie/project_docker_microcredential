@@ -8,7 +8,11 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 #copy the server script (server.py) to the working directory
 COPY server.py .
-#container will listen on local port 8080 for incoming requests
+#container will listen on port 8080 for incoming requests --> the container runs internally on port 8080
 EXPOSE 8080 
 #run the server script when the container starts
 CMD ["python", "server.py"]
+
+#To build and run the Docker image and container for the server:
+#`docker build --tag ml-serve:v0.1 -f Dockerfile.infer .`
+#`docker run -u 501:20 -p 8080:8080 -v ./models:/app/models ml-serve:v0.1`
