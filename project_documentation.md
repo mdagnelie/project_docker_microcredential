@@ -54,3 +54,18 @@ Both images `ml-train:v0.1`and `ml-serve:v0.1` were pushed to my dockerhub repo 
 - `docker tag ml-serve:v0.1 mdagnelie/ml-serve:v0.1` and `docker push  mdagnelie/ml-serve:v0.1`
 
 # Apptainer on the HPC 
+I opened a RHEL9 login shell on the HPC Ughent and tried to pull my Docker image `ml-train:v0.1`from Dockerhub using:
+- `apptainer pull ml-train.sif docker://mdagnelie/ml-train:v0.1`
+  
+But I got this error: 
+- FATAL:   While making image from oci registry: error fetching image to cache: while building SIF from layers: conveyor failed to get: no child with platform linux/amd64 in index mdagnelie/ml-train:v0.1
+
+That is because I built the ml-train image with docker on my Mac Apple Silicon which use by default ARM64 architecture to build images, while linux, running on the HPC, uses AMD64. \
+I thus rebuilt a docker image for the model training using `docker buildx` to specify using AMD64, that I directly pushed to my Dockerhub:
+- `docker buildx build --platform linux/amd64 -t mdagnelie/ml-train:v0.1 -f Dockerfile.train --push .`
+  
+I then created a shell script `script_ml-train.sh` (available on github) for the job for both pulling the new Docker image and running the training in `$VSC_DATA`.\
+I then moved the script to `$VSC_SCRATCH` for the actual job : 
+- `sbatch script_ml-train.sh` to run the script
+
+I then copy/pasted the output logs of the job (`cat slurm-59848706.out`) to add them to the Github repository.
